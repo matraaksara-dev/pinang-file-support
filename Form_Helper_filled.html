@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Helper — Pitching Day FBP 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f2a54;
+    --navy-dark:#0a1d3c;
+    --gold:#f3b53d;
+    --gold-dark:#d99a1e;
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --ink:#16213e;
+    --muted:#6b7589;
+    --border:#e1e5f0;
+    --red:#e0473e;
+    --green:#2f9e5a;
+    --radius:14px;
+    --shadow:0 2px 10px rgba(15,42,84,0.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+    padding-bottom:90px;
+  }
+  h1,h2,h3,label,.eyebrow,.nav-pill,.btn{font-family:'Manrope',sans-serif;}
+
+  /* ===== Header ===== */
+  header.top{
+    position:relative;
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);
+    color:#fff;
+    overflow:hidden;
+    padding:36px 20px 30px;
+  }
+  header.top .shape{
+    position:absolute;
+    width:90px;height:90px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    opacity:0.18;
+  }
+  header.top .shape.s1{top:-45px; left:-25px;}
+  header.top .shape.s2{bottom:-55px; right:8%; background:#fff; opacity:0.08;}
+  header.top .inner{
+    position:relative;
+    max-width:880px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    color:var(--gold);
+    padding:4px 10px;
+    border-radius:99px;
+    margin-bottom:14px;
+  }
+  header.top h1{
+    margin:0 0 8px;
+    font-size:clamp(22px,4vw,30px);
+    font-weight:800;
+    letter-spacing:-0.01em;
+  }
+  header.top p.lead{
+    margin:0 0 18px;
+    max-width:640px;
+    color:#cfd9ec;
+    font-size:14.5px;
+  }
+  .header-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+  }
+  .deadline-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(224,71,62,0.18);
+    border:1px solid rgba(224,71,62,0.5);
+    color:#ffd9d6;
+    font-size:13px;
+    font-weight:700;
+    padding:7px 12px;
+    border-radius:99px;
+  }
+  .btn{
+    border:none;
+    cursor:pointer;
+    font-weight:700;
+    font-size:13.5px;
+    border-radius:99px;
+    padding:9px 16px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    text-decoration:none;
+    transition:transform .12s ease, opacity .12s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-gold{background:var(--gold); color:var(--navy-dark);}
+  .btn-gold:hover{background:var(--gold-dark);}
+  .btn-ghost{background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.35);}
+  .btn-ghost:hover{background:rgba(255,255,255,0.16);}
+  .disclaimer{
+    margin-top:16px;
+    font-size:12.5px;
+    color:#b9c4dc;
+    border-top:1px solid rgba(255,255,255,0.15);
+    padding-top:12px;
+    max-width:640px;
+  }
+
+  /* ===== Sticky section nav ===== */
+  nav.section-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    box-shadow:var(--shadow);
+  }
+  nav.section-nav .nav-inner{
+    max-width:880px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 20px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.section-nav .nav-inner::-webkit-scrollbar{display:none;}
+  .nav-pill{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--muted);
+    text-decoration:none;
+    padding:6px 12px 6px 6px;
+    border-radius:99px;
+    border:1px solid var(--border);
+    white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .nav-pill .num{
+    width:20px;height:20px;
+    border-radius:50%;
+    background:var(--bg);
+    color:var(--navy);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;
+  }
+  .nav-pill.active{
+    background:var(--navy);
+    color:#fff;
+    border-color:var(--navy);
+  }
+  .nav-pill.active .num{background:var(--gold); color:var(--navy-dark);}
+  .nav-clear{
+    margin-left:auto;
+    flex:0 0 auto;
+    background:none;
+    border:1px solid var(--border);
+    color:var(--red);
+    font-weight:700;
+    font-size:12px;
+    padding:6px 12px;
+    border-radius:99px;
+    cursor:pointer;
+  }
+  .nav-clear:hover{background:#fdecea;}
+
+  /* ===== Layout ===== */
+  main{
+    max-width:880px;
+    margin:0 auto;
+    padding:28px 20px 10px;
+  }
+  section.block{
+    margin-bottom:46px;
+    scroll-margin-top:64px;
+  }
+  .block-head{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .block-num{
+    flex:0 0 auto;
+    width:34px;height:34px;
+    border-radius:10px;
+    background:var(--navy);
+    color:var(--gold);
+    font-weight:800;
+    font-family:'Manrope',sans-serif;
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;
+  }
+  .block-head h2{
+    margin:0;
+    font-size:19px;
+    font-weight:800;
+    color:var(--navy-dark);
+  }
+  .block-head .block-sub{
+    margin:2px 0 0;
+    font-size:12.5px;
+    color:var(--muted);
+    font-weight:500;
+    font-family:'Inter',sans-serif;
+  }
+  .block-note{
+    background:#eef2fb;
+    border-left:3px solid var(--navy);
+    color:#33405f;
+    font-size:13px;
+    border-radius:8px;
+    padding:10px 14px;
+    margin:14px 0 18px;
+  }
+  .syarat-box{
+    border:1.5px dashed var(--red);
+    background:#fff6f5;
+    color:#7a2a25;
+    border-radius:10px;
+    padding:12px 14px;
+    margin-top:18px;
+    font-size:13px;
+  }
+  .syarat-box b{color:var(--red);}
+  .example-box{
+    background:#fbfaf6;
+    border:1px solid #ece4cf;
+    border-radius:10px;
+    padding:12px 14px;
+    margin:14px 0;
+    font-size:13px;
+    color:#544a2f;
+  }
+  .example-box summary{cursor:pointer; font-weight:700; color:#8a6c1d;}
+  .example-box ul{margin:8px 0 0; padding-left:18px;}
+  .example-box li{margin-bottom:4px;}
+
+  /* ===== Field cards ===== */
+  .field-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .field-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:4px;
+  }
+  .field-head label{
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--navy-dark);
+    line-height:1.35;
+  }
+  .req{color:var(--red); margin-left:3px;}
+  .hint{
+    margin:2px 0 10px;
+    font-size:12px;
+    color:var(--muted);
+    font-family:'Inter',sans-serif;
+  }
+  .text-input, .textarea-input{
+    width:100%;
+    border:1.5px solid var(--border);
+    border-radius:9px;
+    padding:9px 11px;
+    font-size:13.5px;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:#fafbfd;
+    resize:vertical;
+  }
+  .textarea-input{min-height:84px;}
+  .text-input:focus, .textarea-input:focus{
+    outline:none;
+    border-color:var(--navy);
+    background:#fff;
+  }
+  .counter{
+    text-align:right;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:5px;
+  }
+  .counter.over{color:var(--red); font-weight:700;}
+
+  .copy-btn{
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    border-radius:99px;
+    padding:5px 11px 5px 8px;
+    font-size:11.5px;
+    font-weight:700;
+    cursor:pointer;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .copy-btn:hover{background:var(--navy-dark);}
+  .copy-btn:active{transform:scale(0.95);}
+  .copy-btn.copied{background:var(--green);}
+  .copy-btn svg{flex:0 0 auto;}
+
+  /* ===== Groups (radio/checkbox) ===== */
+  .opts-grid{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+  .opts-grid.opts-row{
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .opts-row label{
+    flex:0 0 auto;
+  }
+  .opt-radio, .opt-checkbox{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:var(--ink);
+    background:#fafbfd;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:8px 10px;
+    cursor:pointer;
+  }
+  .opts-row .opt-radio{
+    padding:7px 13px;
+    border-radius:99px;
+  }
+  .opt-radio:hover, .opt-checkbox:hover{border-color:var(--navy);}
+  .opt-radio input, .opt-checkbox input[type=checkbox]{
+    accent-color:var(--navy);
+    width:15px;height:15px;
+    flex:0 0 auto;
+  }
+  .opt-other{align-items:center;}
+  .opt-other .other-text{
+    flex:1 1 auto;
+    border:1px solid var(--border);
+    border-radius:7px;
+    padding:5px 8px;
+    font-size:12.5px;
+    font-family:'Inter',sans-serif;
+  }
+
+  /* ===== UVP ===== */
+  .uvp-entry{
+    border:1.5px solid #dfe6f5;
+    border-radius:16px;
+    padding:14px;
+    margin-bottom:16px;
+    background:#fbfcff;
+  }
+  .uvp-entry-title{
+    font-size:12.5px;
+    font-weight:800;
+    color:var(--gold-dark);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin-bottom:8px;
+  }
+  .uvp-entry-title .req{margin-left:2px;}
+  .remove-uvp{
+    margin-top:4px;
+    background:none;
+    border:none;
+    color:var(--red);
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+    text-decoration:underline;
+  }
+  .add-uvp-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  #add-uvp-btn{
+    background:#fff;
+    border:1.5px dashed var(--navy);
+    color:var(--navy);
+    border-radius:10px;
+    padding:9px 14px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  #add-uvp-btn:disabled{
+    opacity:0.45; cursor:not-allowed;
+  }
+  .uvp-count-note{font-size:12px; color:var(--muted);}
+
+  /* ===== File helper cards ===== */
+  .filehelp-card{background:#fff9ec; border-color:#f1ddaa;}
+  .filename-input{
+    background:#fff;
+    font-family:'Inter',monospace;
+    color:#8a6c1d;
+    font-weight:600;
+  }
+
+  /* ===== Floating copy-all ===== */
+  .fab{
+    position:fixed;
+    bottom:18px; left:50%;
+    transform:translateX(-50%);
+    z-index:60;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    border-radius:99px;
+    padding:12px 22px;
+    font-weight:800;
+    font-size:13.5px;
+    font-family:'Manrope',sans-serif;
+    box-shadow:0 6px 20px rgba(15,42,84,0.35);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .fab.copied{background:var(--green);}
+  .fab:active{transform:translateX(-50%) scale(0.96);}
+
+  footer.foot{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    padding:20px;
+  }
+
+  @media (max-width:640px){
+    header.top{padding:28px 16px 24px;}
+    .header-actions{flex-direction:column; align-items:flex-start;}
+    .field-head{flex-direction:row;}
+    .copy-btn .copy-label{display:none;}
+    .copy-btn{padding:7px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="shape s1"></div>
+  <div class="shape s2"></div>
+  <div class="inner">
+    <span class="eyebrow">Form Helper · Tidak Resmi</span>
+    <h1>Penyusun Jawaban — Pitching Day FBP 2026</h1>
+    <p class="lead">Susun, rapikan, dan hitung karakter jawaban Anda di sini terlebih dahulu — urutannya sama persis dengan formulir resmi “Kelengkapan Seleksi Pitching Day Forum Bisnis Paten Indonesia 2026”. Setelah selesai, salin setiap jawaban ke Google Form resmi menggunakan tombol salin di pojok kanan atas setiap kotak.</p>
+    <div class="header-actions">
+      <span class="deadline-badge">⏰ Batas Waktu: Rabu, 1 Juli 2026</span>
+      <a class="btn btn-gold" href="https://bit.ly/KelengkapanSeleksiPitchingDayFBP2026" target="_blank" rel="noopener">Buka Google Form Resmi ↗</a>
+    </div>
+    <p class="disclaimer">Halaman ini hanya alat bantu menulis &amp; merapikan jawaban, berjalan di browser Anda sendiri dan <b>bukan</b> formulir pendaftaran resmi. Jawaban tidak tersimpan otomatis dan akan hilang bila halaman ditutup atau dimuat ulang — pastikan menyalin semua jawaban ke Google Form sebelum menutup tab ini.</p>
+  </div>
+</header>
+
+<nav class="section-nav">
+  <div class="nav-inner" id="nav-inner">
+    <a class="nav-pill" data-target="sec-identitas" href="#sec-identitas"><span class="num">1</span>Identitas</a>
+    <a class="nav-pill" data-target="sec-techbrief" href="#sec-techbrief"><span class="num">2</span>Technology Brief</a>
+    <a class="nav-pill" data-target="sec-uvp" href="#sec-uvp"><span class="num">3</span>UVP &amp; Materi</a>
+    <a class="nav-pill" data-target="sec-detail" href="#sec-detail"><span class="num">4</span>Detail Inovasi</a>
+    <a class="nav-pill" data-target="sec-potensi" href="#sec-potensi"><span class="num">5</span>Potensi &amp; Komersialisasi</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ============ SECTION 1 — IDENTITAS ============ -->
+  <section class="block" id="sec-identitas">
+    <div class="block-head">
+      <div class="block-num">1</div>
+      <div>
+        <h2>Identitas Pemohon &amp; Paten</h2>
+        <p class="block-sub">Mengacu pada Slide 8 — data instansi, nomor paten, dan kontak inventor.</p>
+      </div>
+    </div>
+
+    <div id="fields-identitas"></div>
+
+    <div class="syarat-box">
+      <b>Syarat:</b> Inovasi yang telah diberi Paten (Granted). Diutamakan terkait <i>Green Technology</i>, Kesehatan dan Kosmetik dari Bahan Alam, atau Pangan dan Pertanian berbasis lokal.<br>
+      <i>*Nomor Permohonan Paten dan Nomor Paten mengacu pada satu invensi yang sama.</i>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2 — TECHNOLOGY BRIEF ============ -->
+  <section class="block" id="sec-techbrief">
+    <div class="block-head">
+      <div class="block-num">2</div>
+      <div>
+        <h2>Technology Brief</h2>
+        <p class="block-sub">Mengacu pada Slide 9 — ringkasan inovasi yang menonjolkan keunggulan, manfaat, serta nilai komersial yang dapat menarik minat calon mitra industri dan investor.</p>
+      </div>
+    </div>
+
+    <div id="techbrief-static">
+      <div class="field-card">
+        <div class="field-head">
+          <label for="judul_inovasi">Judul Inovasi <span class="req">*</span></label>
+          <button class="copy-btn" data-copy="judul_inovasi" type="button">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>
+            <span class="copy-label">Salin</span>
+          </button>
+        </div>
+        <p class="hint">Tuliskan judul inovasi yang menarik, mudah dipahami, dan mencerminkan nilai komersial teknologi Anda.</p>
+        <input class="text-input" id="judul_inovasi" type="text" placeholder="Contoh: Eco-Friendly Concrete: Beton Ramah Lingkungan dengan Emisi Rendah">
+      </div>
+
+      <details class="example-box">
+        <summary>Lihat contoh judul inovasi</summary>
+        <ul>
+          <li><i>Eco-Friendly Concrete</i>: Beton Ramah Lingkungan dengan Emisi Rendah</li>
+          <li>Biofoam dari Pati Singkong sebagai Pengganti Styrofoam</li>
+          <li>Smart Fertilizer dengan Pelepasan Nutrisi Terkendali</li>
+          <li>Hidrogel Berbasis Kitosan untuk Penyembuhan Luka</li>
+        </ul>
+      </details>
+
+      <div class="field-card filehelp-card">
+        <div class="field-head">
+          <label>Foto Produk Inovasi <span class="req">*</span> — Bantuan Nama File</label>
+          <button class="copy-btn" data-copy="fname_foto" type="button">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>
+            <span class="copy-label">Salin Nama File</span>
+          </button>
+        </div>
+        <p class="hint">Unggah foto / ilustrasi / prototype / kemasan (tanpa deskripsi &amp; infografis), format gambar <i>landscape</i>, max 1 GB. Nama file akan terisi otomatis begitu Anda mengisi “Nomor Permohonan Paten” di Bagian 1.</p>
+        <input class="text-input filename-input" id="fname_foto" type="text" readonly>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3 — UVP & MATERI ============ -->
+  <section class="block" id="sec-uvp">
+    <div class="block-head">
+      <div class="block-num">3</div>
+      <div>
+        <h2>Unique Value Proposition &amp; Materi Promosi</h2>
+        <p class="block-sub">Mengacu pada Slide 10 — keunggulan utama inovasi, penjelasan singkat, pitch deck, dan video.</p>
+      </div>
+    </div>
+
+    <div class="block-note">
+      <i>Unique Value Proposition</i> (UVP) adalah keunggulan utama yang menjadi alasan inovasi Anda layak dipilih, diadopsi, atau dikomersialisasikan. Invensi Anda mengandung <b>minimal 3 UVP dan maksimal 5 UVP</b>.
+    </div>
+
+    <details class="example-box">
+      <summary>Lihat contoh UVP</summary>
+      <p style="margin:8px 0 2px;"><b>UVP:</b> High Process Efficiency &amp; Cost Optimization</p>
+      <p style="margin:0;"><b>Uraian:</b> Inovasi ini menghadirkan efisiensi proses yang signifikan dengan memangkas tahapan operasional dan mengoptimalkan penggunaan sumber daya. Hasilnya adalah proses produksi yang lebih cepat, hemat biaya, dan lebih stabil, sehingga memberikan nilai tambah nyata bagi industri dalam meningkatkan produktivitas dan profitabilitas secara berkelanjutan.</p>
+    </details>
+
+    <div id="uvp-list"></div>
+
+    <div class="add-uvp-row" style="display:none;">
+      <button id="add-uvp-btn" type="button">+ Tambah UVP</button>
+    </div>
+
+    <div id="uvp-static-after">
+      <div class="field-card">
+        <div class="field-head">
+          <label for="penjelasan_singkat">Penjelasan Singkat Inovasi <span class="req">*</span></label>
+          <button class="copy-btn" data-copy="penjelasan_singkat" type="button">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>
+            <span class="copy-label">Salin</span>
+          </button>
+        </div>
+        <p class="hint">Jelaskan inovasi Anda dengan bahasa yang mudah dipahami, mencakup permasalahan yang diselesaikan, solusi yang ditawarkan, dan manfaat yang dihasilkan. <b>Bukan</b> merupakan Uraian Singkat Invensi yang terdapat pada Deskripsi Paten.</p>
+        <textarea class="textarea-input" id="penjelasan_singkat" maxlength="750" placeholder="Maksimal 750 karakter"></textarea>
+        <div class="counter"><span data-count="penjelasan_singkat">0</span>/750 karakter</div>
+      </div>
+
+      <div class="field-card filehelp-card">
+        <div class="field-head">
+          <label>Pitch Deck Inovasi <span class="req">*</span> — Bantuan Nama File</label>
+          <button class="copy-btn" data-copy="fname_pitchdeck" type="button">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>
+            <span class="copy-label">Salin Nama File</span>
+          </button>
+        </div>
+        <p class="hint">Format PDF, memuat informasi sebagaimana tercantum di surat.</p>
+        <input class="text-input filename-input" id="fname_pitchdeck" type="text" readonly>
+      </div>
+
+      <div class="field-card">
+        <div class="field-head">
+          <label for="video_link">Video Inovasi (Link YouTube)</label>
+          <button class="copy-btn" data-copy="video_link" type="button">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>
+            <span class="copy-label">Salin</span>
+          </button>
+        </div>
+        <p class="hint">Bersifat opsional. Durasi maksimal 1 menit.</p>
+        <input class="text-input" id="video_link" type="text" placeholder="https://youtube.com/...">
+      </div>
+
+      <div class="field-card filehelp-card">
+        <div class="field-head">
+          <label>Video Inovasi (apabila tidak diunggah di YouTube) — Bantuan Nama File</label>
+          <button class="copy-btn" data-copy="fname_video" type="button">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>
+            <span class="copy-label">Salin Nama File</span>
+          </button>
+        </div>
+        <p class="hint">Bersifat opsional. Durasi maksimal 1 menit.</p>
+        <input class="text-input filename-input" id="fname_video" type="text" readonly>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4 — DETAIL INOVASI ============ -->
+  <section class="block" id="sec-detail">
+    <div class="block-head">
+      <div class="block-num">4</div>
+      <div>
+        <h2>Detail Inovasi</h2>
+        <p class="block-sub">Mengacu pada Slide 11 — berisi detail inovasi yang akan ditampilkan pada laman Forum Bisnis Paten DJKI.</p>
+      </div>
+    </div>
+    <div id="fields-detail"></div>
+  </section>
+
+  <!-- ============ SECTION 5 — POTENSI & KOMERSIALISASI ============ -->
+  <section class="block" id="sec-potensi">
+    <div class="block-head">
+      <div class="block-num">5</div>
+      <div>
+        <h2>Potensi Pemanfaatan &amp; Arah Komersialisasi</h2>
+        <p class="block-sub">Mengacu pada Slide 12 — calon pengguna, sektor, dampak, dan rencana komersialisasi.</p>
+      </div>
+    </div>
+    <div id="fields-potensi"></div>
+  </section>
+
+</main>
+
+<button class="fab" id="copy-all-btn" type="button">
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>
+  <span id="copy-all-label">Salin Semua Jawaban</span>
+</button>
+
+<footer class="foot">Form Helper Pitching Day FBP 2026 · Disusun mengikuti materi Sosialisasi &amp; Pendampingan Pengisian Formulir · Bukan media penyimpanan resmi.</footer>
+
+<script>
+const REQ = '<span class="req">*</span>';
+const COPY_ICON = '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>';
+
+/* ---------- field data (mirrors Slide 8, 11, 12) ---------- */
+const IDENTITAS_FIELDS = [
+  {id:'nama_instansi', label:'Nama Instansi', type:'text', required:true, hint:'Nama perguruan tinggi, lembaga penelitian, atau perusahaan.'},
+  {id:'no_permohonan', label:'Nomor Permohonan Paten', type:'text', required:true, hint:'Identitas permohonan paten sebelum paten diberikan (granted) oleh DJKI.', placeholder:'Contoh: P00202xxxxxx / S00202xxxxxx'},
+  {id:'no_paten', label:'Nomor Paten', type:'text', required:true, hint:'Nomor paten yang telah diterbitkan DJKI.', placeholder:'Contoh: IDP0000xxxxx / IDS0000xxxxx'},
+  {id:'nama_inventor', label:'Nama Inventor', type:'text', required:true, hint:'Harap mencantumkan inventor utama saja.'},
+  {id:'email', label:'Email', type:'text', required:true, hint:'Alamat email aktif yang dapat dihubungi.'},
+  {id:'no_hp', label:'Nomor Handphone', type:'text', required:true, hint:'Nomor WhatsApp aktif untuk keperluan koordinasi.'}
+];
+
+const DETAIL_FIELDS = [
+  {id:'permasalahan', label:'Permasalahan yang Diselesaikan oleh Inovasi Anda', type:'textarea', required:true, maxlength:1000, hint:'Jelaskan permasalahan, kebutuhan, atau tantangan yang menjadi latar belakang pengembangan inovasi.'},
+  {id:'solusi', label:'Solusi yang Diberikan oleh Inovasi Anda', type:'textarea', required:true, maxlength:1000, hint:'Jelaskan bagaimana cara kerja/solusi inovasi Anda dalam memecahkan permasalahan tersebut.'},
+  {id:'keunggulan_existing', label:'Keunggulan Inovasi Anda Dibandingkan dengan Produk yang Sudah Ada', type:'textarea', required:true, maxlength:750},
+  {id:'status_pengembangan', label:'Status Pengembangan Inovasi Saat Ini', type:'radio', required:true,
+    options:['Tahap penelitian awal','Prototipe awal','Uji terbatas','Implementasi awal','Siap diterapkan lebih luas / Diproduksi Massal']},
+  {id:'tkt', label:'Tingkat Kesiapan Teknologi (TKT)', type:'radio', required:true, layout:'row',
+    hint:'Diisi dengan nilai TKT/TRL (technology readiness level).',
+    options:['1','2','3','4','5','6','7','8','9']},
+  {id:'prototipe', label:'Apakah Tersedia Prototipe?', type:'radio', required:true, options:['Ya','Tidak']}
+];
+
+const POTENSI_FIELDS = [
+  {id:'calon_pengguna', label:'Siapa yang Menjadi Calon Pengguna', type:'textarea', required:true, maxlength:750, hint:'Diisi dengan calon pengguna/end user dari inovasi Anda.'},
+  {id:'sektor_industri', label:'Sektor/Industri Terkait untuk Aplikasi Inovasi Anda', type:'textarea', required:true, maxlength:750},
+  {id:'potensi_dampak', label:'Potensi/Dampak dari Inovasi Anda (Ekonomi, Sosial, Lingkungan)', type:'textarea', required:true, maxlength:750},
+  {id:'bentuk_komersialisasi', label:'Bentuk Komersialisasi Paten yang Anda Harapkan', type:'checkbox', required:true, other:true,
+    options:['Lisensi','Kerja sama industri','Produksi mandiri']},
+  {id:'tantangan_implementasi', label:'Tantangan Implementasi dari Inovasi Anda', type:'textarea', required:true, maxlength:750},
+  {id:'dukungan_kolaborasi', label:'Dukungan/Kolaborasi yang Dibutuhkan', type:'checkbox', required:true, other:true,
+    options:['Pengembangan teknologi lanjutan','Validasi/uji lapangan','Mitra implementasi','Dukungan produksi/manufaktur','Pendanaan','Sertifikasi/regulasi','Pendampingan pemanfaatan','Jejaring industri/pengguna']},
+  {id:'sudah_mitra', label:'Apakah Saat Ini Sudah Memiliki Mitra Industri?', type:'radio', required:true,
+    options:['Ya','Tidak','Sedang dalam proses diskusi']},
+  {id:'status_kerjasama_mitra', label:'Jika Sudah Memiliki Mitra Industri, Jelaskan Status Kerja Sama Antara Anda dan Mitra Industri', type:'textarea', required:false, maxlength:1000}
+];
+
+/* ---------- renderers ---------- */
+function textField(f){
+  return `
+  <div class="field-card" id="card-${f.id}">
+    <div class="field-head">
+      <label for="${f.id}">${f.label}${f.required?REQ:''}</label>
+      <button class="copy-btn" data-copy="${f.id}" type="button">${COPY_ICON}<span class="copy-label">Salin</span></button>
+    </div>
+    ${f.hint?`<p class="hint">${f.hint}</p>`:''}
+    <input class="text-input" id="${f.id}" type="text" placeholder="${f.placeholder||''}">
+  </div>`;
+}
+
+function textareaField(f){
+  return `
+  <div class="field-card" id="card-${f.id}">
+    <div class="field-head">
+      <label for="${f.id}">${f.label}${f.required?REQ:''}</label>
+      <button class="copy-btn" data-copy="${f.id}" type="button">${COPY_ICON}<span class="copy-label">Salin</span></button>
+    </div>
+    ${f.hint?`<p class="hint">${f.hint}</p>`:''}
+    <textarea class="textarea-input" id="${f.id}" ${f.maxlength?`maxlength="${f.maxlength}"`:''} placeholder="${f.maxlength?'Maksimal '+f.maxlength+' karakter':''}"></textarea>
+    ${f.maxlength?`<div class="counter"><span data-count="${f.id}">0</span>/${f.maxlength} karakter</div>`:''}
+  </div>`;
+}
+
+function radioGroup(g){
+  const opts = g.options.map(o=>`
+    <label class="opt-radio">
+      <input type="radio" name="${g.id}" value="${o}">
+      <span>${o}</span>
+    </label>`).join('');
+  return `
+  <div class="field-card group-card" id="group-${g.id}">
+    <div class="field-head">
+      <label>${g.label}${g.required?REQ:''}</label>
+      <button class="copy-btn" data-copy-group="${g.id}" type="button">${COPY_ICON}<span class="copy-label">Salin</span></button>
+    </div>
+    ${g.hint?`<p class="hint">${g.hint}</p>`:''}
+    <div class="opts-grid ${g.layout==='row'?'opts-row':''}">${opts}</div>
+  </div>`;
+}
+
+function checkboxGroup(g){
+  const opts = g.options.map(o=>`
+    <label class="opt-checkbox">
+      <input type="checkbox" name="${g.id}" value="${o}">
+      <span>${o}</span>
+    </label>`).join('');
+  const other = g.other ? `
+    <label class="opt-checkbox opt-other">
+      <input type="checkbox" class="other-toggle">
+      <span>Other:</span>
+      <input type="text" class="other-text" placeholder="Tulis lainnya...">
+    </label>` : '';
+  return `
+  <div class="field-card group-card" id="group-${g.id}">
+    <div class="field-head">
+      <label>${g.label}${g.required?REQ:''}</label>
+      <button class="copy-btn" data-copy-group="${g.id}" type="button">${COPY_ICON}<span class="copy-label">Salin</span></button>
+    </div>
+    ${g.hint?`<p class="hint">${g.hint}</p>`:''}
+    <div class="opts-grid">${opts}${other}</div>
+  </div>`;
+}
+
+function renderItem(item){
+  if(item.type==='text') return textField(item);
+  if(item.type==='textarea') return textareaField(item);
+  if(item.type==='radio') return radioGroup(item);
+  if(item.type==='checkbox') return checkboxGroup(item);
+  return '';
+}
+
+function setHTML(containerId, items){
+  const el = document.getElementById(containerId);
+  el.innerHTML = items.map(renderItem).join('');
+  bindAll(el);
+}
+
+/* ---------- UVP (dynamic 3–5 entries) ---------- */
+let uvpCount = 4;
+const MIN_UVP = 4, MAX_UVP = 4;
+
+function renderUVP(){
+  const container = document.getElementById('uvp-list');
+  let html = '';
+  for(let i=1;i<=uvpCount;i++){
+    html += `
+    <div class="uvp-entry" id="uvp-entry-${i}">
+      <div class="uvp-entry-title">UVP ${i}${i<=3?'<span class="req">*</span>':''}</div>
+      <div class="field-card">
+        <div class="field-head">
+          <label for="uvp_title_${i}">Unique Value Proposition / Keunggulan Utama Inovasi (${i})</label>
+          <button class="copy-btn" data-copy="uvp_title_${i}" type="button">${COPY_ICON}<span class="copy-label">Salin</span></button>
+        </div>
+        <input class="text-input" id="uvp_title_${i}" maxlength="40" placeholder="Maksimal 40 karakter">
+        <div class="counter"><span data-count="uvp_title_${i}">0</span>/40 karakter</div>
+      </div>
+      <div class="field-card">
+        <div class="field-head">
+          <label for="uvp_desc_${i}">Uraian UVP / Keunggulan Utama Inovasi (${i})</label>
+          <button class="copy-btn" data-copy="uvp_desc_${i}" type="button">${COPY_ICON}<span class="copy-label">Salin</span></button>
+        </div>
+        <textarea class="textarea-input" id="uvp_desc_${i}" maxlength="400" placeholder="Maksimal 400 karakter"></textarea>
+        <div class="counter"><span data-count="uvp_desc_${i}">0</span>/400 karakter</div>
+      </div>
+      ${i>MIN_UVP?`<button class="remove-uvp" data-remove="${i}" type="button">Hapus UVP ${i}</button>`:''}
+    </div>`;
+  }
+  container.innerHTML = html;
+  bindAll(container);
+  container.querySelectorAll('.remove-uvp').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      uvpCount = Math.max(MIN_UVP, uvpCount-1);
+      renderUVP();
+    });
+  });
+  document.getElementById('add-uvp-btn').disabled = uvpCount >= MAX_UVP;
+}
+
+/* ---------- binding helpers ---------- */
+function updateCounter(el){
+  const counterEl = document.querySelector(`[data-count="${el.id}"]`);
+  if(!counterEl) return;
+  const len = el.value.length;
+  counterEl.textContent = len;
+  const wrap = counterEl.closest('.counter');
+  const max = parseInt(el.getAttribute('maxlength')||'0',10);
+  if(wrap){ wrap.classList.toggle('over', max>0 && len>=max); }
+}
+
+function doCopy(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).catch(()=>fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+function fallbackCopy(text){
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+function flashBtn(btn, msg){
+  const labelEl = btn.querySelector('.copy-label');
+  const original = labelEl ? labelEl.textContent : null;
+  if(labelEl) labelEl.textContent = msg;
+  btn.classList.add('copied');
+  clearTimeout(btn._t);
+  btn._t = setTimeout(()=>{
+    if(labelEl && original!==null) labelEl.textContent = original;
+    btn.classList.remove('copied');
+  }, 1300);
+}
+
+function copyField(btn){
+  const el = document.getElementById(btn.dataset.copy);
+  if(!el) return;
+  const val = el.value.trim();
+  if(!val){ flashBtn(btn,'Kosong'); return; }
+  doCopy(val);
+  flashBtn(btn,'Disalin!');
+}
+
+function copyGroup(btn){
+  const wrap = document.getElementById('group-'+btn.dataset.copyGroup);
+  if(!wrap) return;
+  let values = Array.from(wrap.querySelectorAll('input[type=radio]:checked, input[type=checkbox]:checked:not(.other-toggle)')).map(i=>i.value);
+  const otherToggle = wrap.querySelector('.other-toggle');
+  const otherText = wrap.querySelector('.other-text');
+  if(otherToggle && otherToggle.checked && otherText && otherText.value.trim()){
+    values.push(otherText.value.trim());
+  }
+  if(values.length===0){ flashBtn(btn,'Belum dipilih'); return; }
+  doCopy(values.join(', '));
+  flashBtn(btn,'Disalin!');
+}
+
+function bindAll(scope){
+  scope.querySelectorAll('.text-input, .textarea-input').forEach(el=>{
+    if(el.hasAttribute('maxlength')) updateCounter(el);
+    el.addEventListener('input', ()=>updateCounter(el));
+  });
+  scope.querySelectorAll('.copy-btn[data-copy]').forEach(btn=>{
+    btn.addEventListener('click', ()=>copyField(btn));
+  });
+  scope.querySelectorAll('.copy-btn[data-copy-group]').forEach(btn=>{
+    btn.addEventListener('click', ()=>copyGroup(btn));
+  });
+}
+
+/* ---------- filename helper sync ---------- */
+function updateFilenameHelpers(){
+  const nomorEl = document.getElementById('no_permohonan');
+  const nomor = (nomorEl && nomorEl.value.trim()) || '[Nomor Permohonan Paten]';
+  document.getElementById('fname_foto').value = `${nomor}_Foto Produk Inovasi`;
+  document.getElementById('fname_pitchdeck').value = `${nomor}_PPT Produk Inovasi`;
+  document.getElementById('fname_video').value = `${nomor}_Video Produk Inovasi`;
+}
+
+
+/* ---------- copy-all summary ---------- */
+function val(id){
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+function groupSummary(gid){
+  const wrap = document.getElementById('group-'+gid);
+  if(!wrap) return '';
+  let values = Array.from(wrap.querySelectorAll('input[type=radio]:checked, input[type=checkbox]:checked:not(.other-toggle)')).map(i=>i.value);
+  const otherToggle = wrap.querySelector('.other-toggle');
+  const otherText = wrap.querySelector('.other-text');
+  if(otherToggle && otherToggle.checked && otherText && otherText.value.trim()) values.push(otherText.value.trim());
+  return values.join(', ');
+}
+
+function buildSummary(){
+  let lines = [];
+  lines.push('=== 1. IDENTITAS PEMOHON & PATEN ===');
+  IDENTITAS_FIELDS.forEach(f=> lines.push(`${f.label}: ${val(f.id)}`));
+  lines.push('');
+  lines.push('=== 2. TECHNOLOGY BRIEF ===');
+  lines.push(`Judul Inovasi: ${val('judul_inovasi')}`);
+  lines.push(`[Nama file Foto Produk Inovasi]: ${val('fname_foto')}`);
+  lines.push('');
+  lines.push('=== 3. UNIQUE VALUE PROPOSITION & MATERI PROMOSI ===');
+  for(let i=1;i<=uvpCount;i++){
+    lines.push(`UVP (${i}): ${val('uvp_title_'+i)}`);
+    lines.push(`Uraian UVP (${i}): ${val('uvp_desc_'+i)}`);
+  }
+  lines.push(`Penjelasan Singkat Inovasi: ${val('penjelasan_singkat')}`);
+  lines.push(`[Nama file Pitch Deck Inovasi]: ${val('fname_pitchdeck')}`);
+  lines.push(`Video Inovasi (Link YouTube): ${val('video_link')}`);
+  lines.push(`[Nama file Video Inovasi]: ${val('fname_video')}`);
+  lines.push('');
+  lines.push('=== 4. DETAIL INOVASI ===');
+  lines.push(`Permasalahan yang Diselesaikan: ${val('permasalahan')}`);
+  lines.push(`Solusi yang Diberikan: ${val('solusi')}`);
+  lines.push(`Keunggulan Dibandingkan Produk yang Sudah Ada: ${val('keunggulan_existing')}`);
+  lines.push(`Status Pengembangan Inovasi Saat Ini: ${groupSummary('status_pengembangan')}`);
+  lines.push(`Tingkat Kesiapan Teknologi (TKT): ${groupSummary('tkt')}`);
+  lines.push(`Apakah Tersedia Prototipe?: ${groupSummary('prototipe')}`);
+  lines.push('');
+  lines.push('=== 5. POTENSI PEMANFAATAN & ARAH KOMERSIALISASI ===');
+  lines.push(`Calon Pengguna: ${val('calon_pengguna')}`);
+  lines.push(`Sektor/Industri Terkait: ${val('sektor_industri')}`);
+  lines.push(`Potensi/Dampak: ${val('potensi_dampak')}`);
+  lines.push(`Bentuk Komersialisasi Paten yang Diharapkan: ${groupSummary('bentuk_komersialisasi')}`);
+  lines.push(`Tantangan Implementasi: ${val('tantangan_implementasi')}`);
+  lines.push(`Dukungan/Kolaborasi yang Dibutuhkan: ${groupSummary('dukungan_kolaborasi')}`);
+  lines.push(`Apakah Saat Ini Sudah Memiliki Mitra Industri?: ${groupSummary('sudah_mitra')}`);
+  lines.push(`Status Kerja Sama dengan Mitra (jika ada): ${val('status_kerjasama_mitra')}`);
+  return lines.join('\n');
+}
+
+/* ---------- scroll-spy nav ---------- */
+function setupScrollSpy(){
+  const pills = Array.from(document.querySelectorAll('.nav-pill'));
+  const targets = pills.map(p=>document.getElementById(p.dataset.target));
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        pills.forEach(p=> p.classList.toggle('active', p.dataset.target===id));
+      }
+    });
+  }, {rootMargin:'-20% 0px -70% 0px'});
+  targets.forEach(t=>{ if(t) obs.observe(t); });
+}
+
+/* ---------- init ---------- */
+document.addEventListener('DOMContentLoaded', ()=>{
+  setHTML('fields-identitas', IDENTITAS_FIELDS);
+  setHTML('fields-detail', DETAIL_FIELDS);
+  setHTML('fields-potensi', POTENSI_FIELDS);
+  renderUVP();
+  bindAll(document.getElementById('techbrief-static'));
+  bindAll(document.getElementById('uvp-static-after'));
+
+  document.getElementById('no_permohonan').addEventListener('input', updateFilenameHelpers);
+  updateFilenameHelpers();
+
+
+  document.getElementById('copy-all-btn').addEventListener('click', (e)=>{
+    doCopy(buildSummary());
+    const label = document.getElementById('copy-all-label');
+    const btn = e.currentTarget;
+    label.textContent = 'Semua Jawaban Disalin!';
+    btn.classList.add('copied');
+    setTimeout(()=>{ label.textContent='Salin Semua Jawaban'; btn.classList.remove('copied'); }, 1500);
+  });
+
+  setupScrollSpy();
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', ()=>{
+    const setVal = (id, val) => {
+      const el = document.getElementById(id);
+      if(el) { 
+        el.value = val; 
+        updateCounter(el); 
+        el.readOnly = true; 
+        el.style.backgroundColor = '#f0f4fc';
+        el.style.borderColor = '#c5d3ef';
+      }
+    };
+    const setRadio = (name, val) => {
+      const els = document.querySelectorAll(`input[type="radio"][name="${name}"]`);
+      els.forEach(el => { 
+        if(el.value === val) el.checked = true; 
+        el.disabled = true;
+        el.parentElement.style.pointerEvents = 'none';
+      });
+    };
+    const setCheckbox = (name, vals) => {
+      const els = document.querySelectorAll(`input[type="checkbox"][name="${name}"]`);
+      els.forEach(el => { 
+        if(vals.includes(el.value)) el.checked = true; 
+        el.disabled = true;
+        el.parentElement.style.pointerEvents = 'none';
+      });
+    };
+
+    setVal('nama_instansi', `Universitas Brawijaya — Direktorat Inovasi dan Inkubator Bisnis`);
+    setVal('no_paten', `IDS000006449 B`);
+    setVal('nama_inventor', `Tim Inventor: Ika Atsari Dewi, S.TP., M.P.; Dr. Ir. Susinggih Wijana, M.S.; Elce Velenia Rembet, S.TP.`);
+    setVal('email', `ikaatsaridewi@ub.ac.id`);
+    setVal('judul_inovasi', `Eco-Pulp Pinang: Pulp Ramah Lingkungan dari Serat Sabut Pinang Sirih`);
+    setVal('permasalahan', `Indonesia membutuhkan 4 juta ton/tahun pulp untuk kertas seni, namun pasokan domestik jauh dari cukup — memaksa impor hingga 3 juta ton (data 2011). Industri masih bergantung pada kayu hutan, yang produksinya menghasilkan sekitar 950 kg CO₂-equivalent per ton.
+
+Di sisi lain, Indonesia adalah penghasil pinang ke-4 terbesar di dunia dengan 83.211 ton/tahun (2023), namun 60–70% sabut buahnya — limbah yang berpotensi menjadi bahan baku pulp — masih dibakar atau terbuang tanpa pemanfaatan. Ini adalah opportunity cost besar yang siap diubah menjadi nilai ekonomi nyata.`);
+    setVal('solusi', `Eco-Pulp Pinang menghadirkan proses produksi pulp non-kayu terstandarisasi dari limbah sabut pinang sirih: pemasakan dengan NaOH 24-25% selama 90 menit pada suhu 100°C, yang terbukti meningkatkan selulosa dari serat mentah 45,7% menjadi 46,6% dan menurunkan lignin drastis dari 15,9% menjadi 7,62%.
+
+Teknologi ini secara langsung menjawab ketergantungan industri pada pulp kayu impor (3 juta ton/tahun) dengan solusi berbahan baku lokal yang melimpah dan sudah terbukti menghasilkan produk akhir: paper bag dan kotak tisu berbahan serat pinang. Proses ini telah dilindungi paten DJKI (IDS000006449 B) dan siap dikomersialkan.`);
+    setVal('keunggulan_existing', `Dibandingkan pulp kayu konvensional: bahan baku lokal tidak tergantung konsesi hutan; emisi produksi lebih rendah; dan sesuai untuk segmen kertas seni premium bernilai tinggi.
+
+Dibandingkan pulp non-kayu sejenis (bambu, bagas tebu): proses kami secara terukur meningkatkan selulosa menjadi 46,6% dan menurunkan lignin menjadi 7,62% — satu-satunya formula yang teroptimasi spesifik untuk Areca catechu sirih dan sudah dilindungi paten DJKI. Bukti aplikasi nyata (paper bag, kotak tisu) membuktikan kelayakan komersial yang belum dimiliki kompetitor.`);
+    setRadio('status_pengembangan', 'Prototipe awal');
+    setRadio('tkt', '4');
+    setRadio('prototipe', 'Ya');
+    setVal('calon_pengguna', `UMKM dan industri kertas seni (handmade paper) yang membutuhkan bahan baku non-kayu premium untuk produk ekspor bernilai tinggi. Industri kemasan ramah lingkungan yang menjawab regulasi anti-plastik dan tren ESG korporat global (pasar ≥USD 285 miliar). Perusahaan kertas yang ingin mendiversifikasi pasokan dan memasuki segmen green packaging. Lembaga litbang dan perguruan tinggi untuk pengembangan aplikasi turunan (farmasi, F&B premium, luxury packaging).`);
+    setVal('sektor_industri', `Primer: Industri Kertas Seni & Handmade Paper (pasar global tumbuh pesat didorong craft economy dan kemasan premium). Industri Kemasan Ramah Lingkungan / Green Packaging (pasar global ≥USD 285 miliar, CAGR >5%).
+
+Sekunder: Industri Kreatif & Ekspor Kerajinan (produk berbahan serat alami lokal semakin diminati pasar Eropa dan Amerika). Industri Farmasi & F&B Premium (aplikasi kemasan specialty). Pertanian & Pengolahan Pinang (hulu: konsolidasi rantai pasok sabut dari petani).`);
+    setVal('potensi_dampak', `EKONOMI: Substitusi impor kertas seni 3 juta ton/tahun dengan produk lokal bernilai tinggi; membuka akses ke pasar green packaging global ≥USD 285 miliar; menciptakan nilai tambah dari limbah pinang yang tidak termanfaatkan (60–70% dari 83.211 ton/tahun).
+
+SOSIAL: Pemberdayaan petani pinang melalui rantai pasok sabut; menciptakan lapangan kerja baru untuk UMKM pengolahan dan kerajinan kertas seni.
+
+LINGKUNGAN: Mengurangi penebangan kayu hutan untuk kebutuhan pulp; menghilangkan pembakaran limbah sabut; alternatif ramah lingkungan dengan emisi jauh di bawah 950 kg CO₂-eq/ton pulp kayu konvensional.`);
+    setCheckbox('bentuk_komersialisasi', ['Lisensi', 'Kerja sama industri']);
+    setVal('tantangan_implementasi', `Scale-up ke produksi industri (TRL 4→7): diatasi melalui feasibility study pilot dan kemitraan dengan fasilitas produksi existing melalui model contract manufacturing atau joint venture mini mill.
+
+Pengelolaan limbah lindi hitam (black liquor): tersedia 3 jalur mitigasi — recovery boiler (skala besar), presipitasi lignin (skala menengah), dan IPAL biologis (skala pilot) sesuai PP 22/2021.
+
+Konsolidasi rantai pasok sabut pinang: diatasi melalui kemitraan koperasi atau off-taker petani di sentra Sumatera & Sulawesi. Semua tantangan memiliki jalur solusi terencana dalam roadmap komersialisasi 5 tahun.`);
+    setCheckbox('dukungan_kolaborasi', ['Mitra implementasi', 'Dukungan produksi/manufaktur', 'Pendanaan', 'Sertifikasi/regulasi']);
+    setRadio('sudah_mitra', 'Tidak');
+
+    setVal('uvp_title_1', `100% Berbasis Limbah Non-Kayu`);
+    setVal('uvp_desc_1', `Indonesia menghasilkan 83.211 ton pinang per tahun (ke-4 terbesar di dunia), dengan 60–70% sabut yang selama ini terbuang atau dibakar. Kami mengubah limbah yang tidak memiliki nilai menjadi bahan baku pulp premium — solusi circular economy yang tersedia melimpah dan tidak bergantung pada konsesi hutan.`);
+    setVal('uvp_title_2', `Formula Optimal & Terpatenkan`);
+    setVal('uvp_desc_2', `Proses NaOH 24-25%, 90 menit, 100°C terbukti meningkatkan selulosa dari serat mentah 45,7% menjadi 46,6% dan menurunkan lignin dari 15,9% menjadi 7,62% — memenuhi standar bahan baku kertas seni premium. Formula ini telah diuji secara ilmiah dan dilindungi paten DJKI. Mitra mendapatkan akses ke teknologi yang sudah terbukti tanpa perlu R&D dari nol.`);
+    setVal('uvp_title_3', `Produk Akhir Terbukti di Pasar`);
+    setVal('uvp_desc_3', `Pulp Eco-Pinang telah berhasil diaplikasikan menjadi produk akhir nyata: paper bag dan kotak tisu berbahan serat pinang. Ini membuktikan kelayakan komersial melampaui sekadar lab. Mitra industri dapat langsung memanfaatkan teknologi yang sudah melewati uji aplikasi untuk masuk ke pasar craft dan kemasan premium.`);
+    setVal('uvp_title_4', `Paten Terdaftar (Granted)`);
+    setVal('uvp_desc_4', `Paten IDS000006449 B yang telah mendapat status Granted dari DJKI memberikan perlindungan hukum penuh atas formula dan proses produksi ini. Mitra yang bekerja sama mendapat akses eksklusif ke teknologi yang secara hukum belum bisa ditiru pesaing — keunggulan kompetitif yang terproteksi sejak hari pertama.`);
+    
+    setVal('penjelasan_singkat', `Indonesia mengimpor jutaan ton kertas seni karena bahan baku pulp domestik tidak cukup, sementara ribuan ton limbah sabut pinang terbuang setiap tahun. Eco-Pulp Pinang menjawab kedua masalah ini sekaligus.
+
+Dengan teknologi delignifikasi NaOH 24-25% yang terpatenkan (DJKI IDS000006449 B), kami mengubah limbah sabut pinang sirih menjadi pulp berkualitas tinggi: selulosa meningkat dari 45,7% menjadi 46,6% dan lignin turun tajam dari 15,9% menjadi 7,62% — standar kertas seni premium. Produk sudah terbukti menghasilkan paper bag dan kotak tisu berbahan serat lokal. Teknologi ini siap dikomersialkan melalui lisensi atau joint venture — membuka peluang bisnis di pasar green packaging global ≥USD 285 miliar.`);
+
+    const markRed = (id) => {
+      const el = document.getElementById(id);
+      if(el) {
+        el.style.border = '2px solid var(--red)';
+        el.style.boxShadow = '0 0 8px rgba(224, 71, 62, 0.3)';
+        el.style.backgroundColor = '#fff6f5';
+        el.placeholder = 'KOSONG - HARAP DIISI OLEH USER';
+      }
+    };
+    markRed('no_permohonan');
+    markRed('no_hp');
+    
+    updateFilenameHelpers();
+});
+</script>
+</body>
+</html>
